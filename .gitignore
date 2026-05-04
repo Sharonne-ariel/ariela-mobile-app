@@ -1,0 +1,107 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code related
+.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Coverage
+coverage/
+
+# Web
+lib/generated_plugin_registrant.dart
+
+# Symbol files
+**/*.dSYM
+**/*.dSYM.zip
+
+# Environment & secrets — CRITICAL: never commit these
+.env
+.env.local
+.env.production
+.env.development
+*.env
+secrets.json
+google-services.json
+GoogleService-Info.plist
+
+# API keys & sensitive config
+**/openai_key.txt
+**/supabase_keys.txt
+**/revenuecat_keys.txt
+
+# iOS specific
+ios/Pods/
+ios/Runner.xcworkspace/xcuserdata/
+ios/Runner.xcodeproj/xcuserdata/
+ios/Runner.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Android specific
+android/.gradle/
+android/captures/
+android/gradlew
+android/gradlew.bat
+android/local.properties
+android/**/GeneratedPluginRegistrant.java
+android/key.properties
+*.jks
+*.keystore
+
+# Generated localization files
+lib/l10n/generated/
+
+# Test artifacts
+test/coverage/
+.test_runner.dart
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# OS specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor backups
+*.orig
+*.rej
