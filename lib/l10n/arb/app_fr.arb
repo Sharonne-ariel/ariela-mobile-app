@@ -1,5 +1,8 @@
 {
   "@@locale": "fr",
   "appName": "ariela",
-  "tagline": "Comprendre ton corps, à chaque étape."
+  "tagline": "Comprendre ton corps, à chaque étape.",
+  "welcomeTitle": "Bienvenue sur ariela",
+  "welcomeSubtitle": "Ton compagnon de confiance pour la santé féminine, des premières règles à la maternité et au-delà.",
+  "getStarted": "Commencer"
 }

@@ -1,19 +1,49 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../app/petal_logo.dart';
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
+import '../onboarding/welcome_screen.dart';
 
 /// ARIELA splash screen.
 ///
 /// First screen shown when the app launches. Displays the brand mark,
-/// wordmark, and tagline. Will later transition to onboarding or home.
-class SplashScreen extends StatelessWidget {
+/// wordmark, and tagline, then transitions to [WelcomeScreen] after a
+/// brief delay.
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  Timer? _navigationTimer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // After 2 seconds, navigate to the welcome screen.
+    // Using pushReplacement so the user can't go "back" to the splash.
+    _navigationTimer = Timer(const Duration(seconds: 2), () {
+      if (!mounted) return;
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const WelcomeScreen()),
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _navigationTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // Get the localized strings for the current locale (FR or EN).
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -25,12 +55,10 @@ class SplashScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Petal logo mark
                 const PetalLogo(size: 96),
 
                 const SizedBox(height: 32),
 
-                // Wordmark
                 Text(
                   l10n.appName,
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
@@ -42,7 +70,6 @@ class SplashScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // Tagline — automatically switches between FR and EN
                 Text(
                   l10n.tagline,
                   textAlign: TextAlign.center,

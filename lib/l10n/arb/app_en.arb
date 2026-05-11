@@ -2,10 +2,26 @@
   "@@locale": "en",
   "appName": "ariela",
   "@appName": {
-    "description": "The application name as displayed to users"
+    "description": "The application name as displayed to users (always lowercase)"
   },
+
   "tagline": "Understand your body, at every stage.",
   "@tagline": {
     "description": "Brand tagline shown on the splash screen"
+  },
+
+  "welcomeTitle": "Welcome to ariela",
+  "@welcomeTitle": {
+    "description": "Main title on the welcome onboarding screen"
+  },
+
+  "welcomeSubtitle": "Your trusted companion for women's health, from first period to motherhood and beyond.",
+  "@welcomeSubtitle": {
+    "description": "Subtitle paragraph on the welcome screen, explaining the app's value"
+  },
+
+  "getStarted": "Get started",
+  "@getStarted": {
+    "description": "Primary CTA button on the welcome screen"
   }
 }
