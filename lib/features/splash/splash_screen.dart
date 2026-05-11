@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app/petal_logo.dart';
 import '../../app/theme.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 /// ARIELA splash screen.
 ///
@@ -12,6 +13,9 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the localized strings for the current locale (FR or EN).
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: ArielaTheme.surfaceBg,
       body: SafeArea(
@@ -28,7 +32,7 @@ class SplashScreen extends StatelessWidget {
 
                 // Wordmark
                 Text(
-                  'ariela',
+                  l10n.appName,
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         color: ArielaTheme.lavender900,
                         fontSize: 44,
@@ -38,9 +42,9 @@ class SplashScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // Tagline (French — switch with localization later)
+                // Tagline — automatically switches between FR and EN
                 Text(
-                  'Comprendre ton corps, à chaque étape.',
+                  l10n.tagline,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: ArielaTheme.textBody,

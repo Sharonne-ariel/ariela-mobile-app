@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app/theme.dart';
 import 'features/splash/splash_screen.dart';
+import 'l10n/generated/app_localizations.dart';
 
 void main() {
-  // Ensure Flutter bindings are initialized before any platform calls.
   WidgetsFlutterBinding.ensureInitialized();
 
   // Lock app to portrait orientation only.
-  // ARIELA is designed for portrait use; landscape would break layouts.
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -37,6 +37,11 @@ class ArielaApp extends StatelessWidget {
       title: 'ARIELA',
       debugShowCheckedModeBanner: false,
       theme: ArielaTheme.light,
+
+      // Localization configuration
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+
       home: const SplashScreen(),
     );
   }
