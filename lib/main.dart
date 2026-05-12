@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'app/theme.dart';
 import 'features/splash/splash_screen.dart';
 import 'l10n/generated/app_localizations.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Lock app to portrait orientation only.
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  // Load environment variables
+  await dotenv.load(fileName: '.env');
 
-  // Set system UI style: dark icons on light background.
+  // Initialize Supabase
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+  );
+
+  // Lock portrait orientation
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -27,7 +34,9 @@ void main() {
   runApp(const ArielaApp());
 }
 
-/// Root widget of the ARIELA application.
+/// Convenience accessor for the Supabase client.
+final supabase = Supabase.instance.client;
+
 class ArielaApp extends StatelessWidget {
   const ArielaApp({super.key});
 
@@ -37,11 +46,8 @@ class ArielaApp extends StatelessWidget {
       title: 'ARIELA',
       debugShowCheckedModeBanner: false,
       theme: ArielaTheme.light,
-
-      // Localization configuration
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-
       home: const SplashScreen(),
     );
   }
