@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+
+import '../../app/theme.dart';
+import '../../l10n/generated/app_localizations.dart';
+
+/// User's primary goal — corresponds to our four personas.
+enum UserGoal {
+  firstPeriod,
+  cycle,
+  fertility,
+  pregnancy;
+
+  String label(AppLocalizations l10n) => switch (this) {
+        UserGoal.firstPeriod => l10n.goalFirstPeriod,
+        UserGoal.cycle => l10n.goalCycle,
+        UserGoal.fertility => l10n.goalFertility,
+        UserGoal.pregnancy => l10n.goalPregnancy,
+      };
+
+  String subtitle(AppLocalizations l10n) => switch (this) {
+        UserGoal.firstPeriod => l10n.goalFirstPeriodSub,
+        UserGoal.cycle => l10n.goalCycleSub,
+        UserGoal.fertility => l10n.goalFertilitySub,
+        UserGoal.pregnancy => l10n.goalPregnancySub,
+      };
+
+  String get emoji => switch (this) {
+        UserGoal.firstPeriod => '🌱',
+        UserGoal.cycle => '🌸',
+        UserGoal.fertility => '🌼',
+        UserGoal.pregnancy => '🤱',
+      };
+
+  Color get iconBg => switch (this) {
+        UserGoal.firstPeriod => ArielaTheme.pink200,
+        UserGoal.cycle => ArielaTheme.lavender200,
+        UserGoal.fertility => const Color(0xFFFAC775),
+        UserGoal.pregnancy => const Color(0xFF9FE1CB),
+      };
+}

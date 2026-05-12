@@ -4,6 +4,7 @@ import '../../app/petal_logo.dart';
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../ui/components/ariela_button.dart';
+import 'goal_selection_screen.dart';
 
 /// ARIELA welcome screen — the first interactive screen.
 ///
@@ -68,11 +69,9 @@ class WelcomeScreen extends StatelessWidget {
                 label: l10n.getStarted,
                 icon: Icons.arrow_forward_rounded,
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(l10n.getStarted),
-                      duration: const Duration(seconds: 1),
-                      backgroundColor: ArielaTheme.lavender600,
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const GoalSelectionScreen(),
                     ),
                   );
                 },
