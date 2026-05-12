@@ -4,6 +4,7 @@ import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../ui/components/ariela_button.dart';
 import 'user_goal.dart';
+import '../cycle/home_screen.dart';
 
 class GoalSelectionScreen extends StatefulWidget {
   const GoalSelectionScreen({super.key});
@@ -69,11 +70,9 @@ class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
                 onPressed: _selected == null
                     ? null
                     : () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('${_selected!.label(l10n)} ✓'),
-                            backgroundColor: ArielaTheme.lavender600,
-                            duration: const Duration(seconds: 1),
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (_) => const HomeScreen(),
                           ),
                         );
                       },

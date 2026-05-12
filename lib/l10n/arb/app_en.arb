@@ -15,5 +15,41 @@
   "goalFertilitySub": "Fertility tracking",
   "goalPregnancy": "I'm pregnant",
   "goalPregnancySub": "Week-by-week pregnancy tracking",
-  "continueButton": "Continue"
+  "continueButton": "Continue",
+  "homeTitle": "My cycle",
+  "cycleDay": "Day {day}",
+  "@cycleDay": {
+    "placeholders": {
+      "day": { "type": "int" }
+    }
+  },
+  "nextPeriodIn": "Next period in {days} days",
+  "@nextPeriodIn": {
+    "placeholders": {
+      "days": { "type": "int" }
+    }
+  },
+  "logPeriod": "I'm on my period",
+  "logPeriodEnd": "End my period",
+  "calendarTitle": "This month",
+  "noDataYet": "Start by logging your period to see predictions",
+  "monthJan": "January",
+  "monthFeb": "February",
+  "monthMar": "March",
+  "monthApr": "April",
+  "monthMay": "May",
+  "monthJun": "June",
+  "monthJul": "July",
+  "monthAug": "August",
+  "monthSep": "September",
+  "monthOct": "October",
+  "monthNov": "November",
+  "monthDec": "December",
+  "dayMon": "M",
+  "dayTue": "T",
+  "dayWed": "W",
+  "dayThu": "T",
+  "dayFri": "F",
+  "daySat": "S",
+  "daySun": "S"
 }
