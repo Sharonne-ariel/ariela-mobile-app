@@ -18,38 +18,37 @@
   "continueButton": "Continue",
   "homeTitle": "My cycle",
   "cycleDay": "Day {day}",
-  "@cycleDay": {
-    "placeholders": {
-      "day": { "type": "int" }
-    }
-  },
+  "@cycleDay": { "placeholders": { "day": { "type": "int" } } },
   "nextPeriodIn": "Next period in {days} days",
-  "@nextPeriodIn": {
-    "placeholders": {
-      "days": { "type": "int" }
-    }
-  },
+  "@nextPeriodIn": { "placeholders": { "days": { "type": "int" } } },
   "logPeriod": "I'm on my period",
   "logPeriodEnd": "End my period",
   "calendarTitle": "This month",
   "noDataYet": "Start by logging your period to see predictions",
-  "monthJan": "January",
-  "monthFeb": "February",
-  "monthMar": "March",
-  "monthApr": "April",
-  "monthMay": "May",
-  "monthJun": "June",
-  "monthJul": "July",
-  "monthAug": "August",
-  "monthSep": "September",
-  "monthOct": "October",
-  "monthNov": "November",
-  "monthDec": "December",
-  "dayMon": "M",
-  "dayTue": "T",
-  "dayWed": "W",
-  "dayThu": "T",
-  "dayFri": "F",
-  "daySat": "S",
-  "daySun": "S"
+  "monthJan": "January", "monthFeb": "February", "monthMar": "March",
+  "monthApr": "April", "monthMay": "May", "monthJun": "June",
+  "monthJul": "July", "monthAug": "August", "monthSep": "September",
+  "monthOct": "October", "monthNov": "November", "monthDec": "December",
+  "dayMon": "M", "dayTue": "T", "dayWed": "W", "dayThu": "T",
+  "dayFri": "F", "daySat": "S", "daySun": "S",
+  "logSymptoms": "Log symptoms",
+  "symptomsTitle": "How do you feel today?",
+  "symptomsSubtitle": "Select all that apply",
+  "symptomCramps": "Cramps",
+  "symptomHeadache": "Headache",
+  "symptomFatigue": "Fatigue",
+  "symptomBloating": "Bloating",
+  "symptomAcne": "Acne",
+  "symptomMoodHappy": "Happy",
+  "symptomMoodSad": "Sad",
+  "symptomMoodAnxious": "Anxious",
+  "symptomMoodIrritable": "Irritable",
+  "symptomTender": "Tender breasts",
+  "symptomCravings": "Cravings",
+  "symptomBackPain": "Back pain",
+  "saveButton": "Save",
+  "symptomsSavedSnack": "Symptoms saved"
+  ,"comingSoonTitle": "Coming soon",
+  "comingSoonSubtitle": "This mode will be available in the next version. For now, you can use the cycle tracker.",
+  "backToCycle": "Go to cycle tracker"
 }

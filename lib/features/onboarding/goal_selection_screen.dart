@@ -5,6 +5,7 @@ import '../../l10n/generated/app_localizations.dart';
 import '../../ui/components/ariela_button.dart';
 import 'user_goal.dart';
 import '../cycle/home_screen.dart';
+import 'coming_soon_screen.dart';
 
 class GoalSelectionScreen extends StatefulWidget {
   const GoalSelectionScreen({super.key});
@@ -70,11 +71,20 @@ class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
                 onPressed: _selected == null
                     ? null
                     : () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (_) => const HomeScreen(),
-                          ),
-                        );
+                        if (_selected == UserGoal.cycle) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (_) => const HomeScreen(),
+                            ),
+                          );
+                        } else {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  ComingSoonScreen(goal: _selected!),
+                            ),
+                          );
+                        }
                       },
               ),
               const SizedBox(height: 24),

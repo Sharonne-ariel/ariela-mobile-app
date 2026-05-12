@@ -5,6 +5,7 @@ import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../ui/components/ariela_button.dart';
 import 'cycle_data.dart';
+import 'symptoms_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -68,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
 
               // ----- Period CTA -----
+              // ----- Period CTA -----
               ArielaButton(
                 label: period != null && period.endDate == null
                     ? l10n.logPeriodEnd
@@ -76,6 +78,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? Icons.check_rounded
                     : Icons.water_drop_outlined,
                 onPressed: _togglePeriod,
+              ),
+
+              const SizedBox(height: 10),
+
+              // ----- Symptoms CTA -----
+              ArielaButton(
+                label: l10n.logSymptoms,
+                icon: Icons.add_rounded,
+                variant: ArielaButtonVariant.secondary,
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const SymptomsScreen(),
+                    ),
+                  );
+                },
               ),
 
               const SizedBox(height: 32),
