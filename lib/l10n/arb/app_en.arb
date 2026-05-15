@@ -58,4 +58,17 @@
   "languageEnglish": "English",
   "settingsAbout": "About ARIELA",
   "settingsVersion": "Version"
+  ,"authSignIn": "Sign in",
+  "authSignUp": "Create account",
+  "authEmail": "Email",
+  "authPassword": "Password",
+  "authConfirmPassword": "Confirm password",
+  "authNoAccount": "Don't have an account?",
+  "authHasAccount": "Already have an account?",
+  "authSignOut": "Sign out",
+  "authPasswordTooShort": "Password must be at least 6 characters",
+  "authInvalidEmail": "Please enter a valid email",
+  "authPasswordsDoNotMatch": "Passwords don't match",
+  "authCheckEmail": "Check your email to confirm your account",
+  "authError": "An error occurred. Please try again."
 }

@@ -55,4 +55,17 @@
   "languageEnglish": "English",
   "settingsAbout": "À propos d'ARIELA",
   "settingsVersion": "Version"
+  ,"authSignIn": "Se connecter",
+  "authSignUp": "Créer un compte",
+  "authEmail": "Email",
+  "authPassword": "Mot de passe",
+  "authConfirmPassword": "Confirmer le mot de passe",
+  "authNoAccount": "Pas encore de compte ?",
+  "authHasAccount": "Tu as déjà un compte ?",
+  "authSignOut": "Se déconnecter",
+  "authPasswordTooShort": "Le mot de passe doit faire au moins 6 caractères",
+  "authInvalidEmail": "Email invalide",
+  "authPasswordsDoNotMatch": "Les mots de passe ne correspondent pas",
+  "authCheckEmail": "Vérifie ton email pour confirmer ton compte",
+  "authError": "Une erreur s'est produite. Réessaie."
 }

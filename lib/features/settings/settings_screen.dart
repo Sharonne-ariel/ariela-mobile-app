@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../auth/auth_repository.dart';
+import '../auth/sign_in_screen.dart';
 import '../../app/locale_provider.dart';
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
@@ -62,6 +63,9 @@ class SettingsScreen extends ConsumerWidget {
             const SizedBox(height: 32),
 
             // ----- About section -----
+            const SizedBox(height: 32),
+
+            // ----- About section -----
             _SectionHeader(label: l10n.settingsAbout),
             const SizedBox(height: 8),
             _SettingsCard(
@@ -72,6 +76,37 @@ class SettingsScreen extends ConsumerWidget {
                     '0.1.0',
                     style: TextStyle(color: ArielaTheme.textMuted),
                   ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 32),
+
+            // ----- Sign out -----
+            _SettingsCard(
+              children: [
+                ListTile(
+                  leading: const Icon(
+                    Icons.logout_rounded,
+                    color: ArielaTheme.error,
+                  ),
+                  title: Text(
+                    l10n.authSignOut,
+                    style: const TextStyle(
+                      color: ArielaTheme.error,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  onTap: () async {
+                    await AuthRepository.instance.signOut();
+                    if (!context.mounted) return;
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (_) => const SignInScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  },
                 ),
               ],
             ),

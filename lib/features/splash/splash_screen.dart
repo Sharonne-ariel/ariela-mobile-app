@@ -5,13 +5,10 @@ import 'package:flutter/material.dart';
 import '../../app/petal_logo.dart';
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
-import '../onboarding/welcome_screen.dart';
+import '../auth/auth_repository.dart';
+import '../auth/sign_in_screen.dart';
+import '../cycle/home_screen.dart';
 
-/// ARIELA splash screen.
-///
-/// First screen shown when the app launches. Displays the brand mark,
-/// wordmark, and tagline, then transitions to [WelcomeScreen] after a
-/// brief delay.
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -26,12 +23,16 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // After 2 seconds, navigate to the welcome screen.
-    // Using pushReplacement so the user can't go "back" to the splash.
     _navigationTimer = Timer(const Duration(seconds: 2), () {
       if (!mounted) return;
+
+      final isSignedIn = AuthRepository.instance.isSignedIn;
+
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const WelcomeScreen()),
+        MaterialPageRoute(
+          builder: (_) =>
+              isSignedIn ? const HomeScreen() : const SignInScreen(),
+        ),
       );
     });
   }
@@ -56,9 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const PetalLogo(size: 96),
-
                 const SizedBox(height: 32),
-
                 Text(
                   l10n.appName,
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
@@ -67,9 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         letterSpacing: -0.88,
                       ),
                 ),
-
                 const SizedBox(height: 16),
-
                 Text(
                   l10n.tagline,
                   textAlign: TextAlign.center,
