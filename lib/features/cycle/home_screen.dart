@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'period_repository.dart';
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../ui/components/ariela_button.dart';
@@ -18,15 +18,30 @@ class _HomeScreenState extends State<HomeScreen> {
   PeriodEntry? _currentPeriod;
   DateTime _displayedMonth = DateTime.now();
 
-  void _togglePeriod() {
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentPeriod();
+  }
+
+  void _loadCurrentPeriod() {
+    _currentPeriod = PeriodRepository.instance.getCurrent();
+  }
+
+  Future<void> _togglePeriod() async {
+    final PeriodEntry newEntry;
+    if (_currentPeriod == null) {
+      newEntry = PeriodEntry(startDate: DateTime.now());
+    } else if (_currentPeriod!.endDate == null) {
+      newEntry = _currentPeriod!.copyWith(endDate: DateTime.now());
+    } else {
+      newEntry = PeriodEntry(startDate: DateTime.now());
+    }
+
+    await PeriodRepository.instance.save(newEntry);
+
     setState(() {
-      if (_currentPeriod == null) {
-        _currentPeriod = PeriodEntry(startDate: DateTime.now());
-      } else if (_currentPeriod!.endDate == null) {
-        _currentPeriod = _currentPeriod!.copyWith(endDate: DateTime.now());
-      } else {
-        _currentPeriod = PeriodEntry(startDate: DateTime.now());
-      }
+      _currentPeriod = newEntry;
     });
   }
 
