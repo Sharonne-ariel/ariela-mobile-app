@@ -51,4 +51,11 @@
   ,"comingSoonTitle": "Coming soon",
   "comingSoonSubtitle": "This mode will be available in the next version. For now, you can use the cycle tracker.",
   "backToCycle": "Go to cycle tracker"
+
+  ,"settingsTitle": "Settings",
+  "settingsLanguage": "Language",
+  "languageFrench": "Français",
+  "languageEnglish": "English",
+  "settingsAbout": "About ARIELA",
+  "settingsVersion": "Version"
 }

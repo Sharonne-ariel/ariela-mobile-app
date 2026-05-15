@@ -49,4 +49,10 @@
   ,"comingSoonTitle": "Bientôt disponible",
   "comingSoonSubtitle": "Ce mode sera disponible dans la prochaine version. Pour l'instant, tu peux utiliser le suivi de cycle.",
   "backToCycle": "Aller au suivi de cycle"
+  ,"settingsTitle": "Réglages",
+  "settingsLanguage": "Langue",
+  "languageFrench": "Français",
+  "languageEnglish": "English",
+  "settingsAbout": "À propos d'ARIELA",
+  "settingsVersion": "Version"
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../app/petal_logo.dart';
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../ui/components/ariela_button.dart';
 import 'cycle_data.dart';
 import 'symptoms_screen.dart';
+import '../settings/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 12),
 
               // ----- Header -----
+             // ----- Header -----
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -57,7 +58,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 26,
                     ),
                   ),
-                  const PetalLogo(size: 32),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.settings_outlined,
+                      color: ArielaTheme.textBody,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const SettingsScreen(),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
 
