@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../ui/components/ariela_button.dart';
+import 'symptoms_repository.dart';
 
 enum Symptom {
   cramps,
@@ -57,7 +58,14 @@ class SymptomsScreen extends StatefulWidget {
 }
 
 class _SymptomsScreenState extends State<SymptomsScreen> {
-  final Set<Symptom> _selected = {};
+  late Set<Symptom> _selected;
+
+  @override
+  void initState() {
+    super.initState();
+    // Load any symptoms already logged for today.
+    _selected = SymptomsRepository.instance.getForDate(DateTime.now());
+  }
 
   void _toggle(Symptom s) {
     setState(() {
@@ -67,6 +75,22 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
         _selected.add(s);
       }
     });
+  }
+
+  Future<void> _save() async {
+    final l10n = AppLocalizations.of(context)!;
+    await SymptomsRepository.instance
+        .saveForDate(DateTime.now(), _selected);
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(l10n.symptomsSavedSnack),
+        backgroundColor: ArielaTheme.lavender600,
+        duration: const Duration(seconds: 1),
+      ),
+    );
+    Navigator.of(context).pop();
   }
 
   @override
@@ -131,18 +155,7 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
               ArielaButton(
                 label: l10n.saveButton,
                 icon: Icons.check_rounded,
-                onPressed: _selected.isEmpty
-                    ? null
-                    : () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(l10n.symptomsSavedSnack),
-                            backgroundColor: ArielaTheme.lavender600,
-                            duration: const Duration(seconds: 1),
-                          ),
-                        );
-                        Navigator.of(context).pop();
-                      },
+                onPressed: _selected.isEmpty ? null : _save,
               ),
               const SizedBox(height: 24),
             ],
