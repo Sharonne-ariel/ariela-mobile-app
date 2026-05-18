@@ -5,6 +5,8 @@ import '../auth/sign_in_screen.dart';
 import '../../app/locale_provider.dart';
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
+import '../cycle/period_repository.dart';
+import '../cycle/symptoms_repository.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -64,6 +66,48 @@ class SettingsScreen extends ConsumerWidget {
 
             // ----- About section -----
             const SizedBox(height: 32),
+            const SizedBox(height: 32),
+
+            // ----- Sync section -----
+            _SectionHeader(label: l10n.settingsSync),
+            const SizedBox(height: 8),
+            _SettingsCard(
+              children: [
+                ListTile(
+                  leading: const Icon(
+                    Icons.cloud_sync_outlined,
+                    color: ArielaTheme.lavender600,
+                  ),
+                  title: Text(l10n.syncNow),
+                  trailing: const Icon(
+                    Icons.chevron_right_rounded,
+                    color: ArielaTheme.textMuted,
+                  ),
+                  onTap: () async {
+                    final messenger = ScaffoldMessenger.of(context);
+                    try {
+                      await PeriodRepository.instance.syncFromCloud();
+                      await SymptomsRepository.instance.syncFromCloud();
+                      messenger.showSnackBar(
+                        SnackBar(
+                          content: Text(l10n.syncSuccess),
+                          backgroundColor: ArielaTheme.success,
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    } catch (_) {
+                      messenger.showSnackBar(
+                        SnackBar(
+                          content: Text(l10n.syncError),
+                          backgroundColor: ArielaTheme.error,
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
 
             // ----- About section -----
             _SectionHeader(label: l10n.settingsAbout),

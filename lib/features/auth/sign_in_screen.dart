@@ -8,6 +8,8 @@ import '../../ui/components/ariela_text_field.dart';
 import '../onboarding/welcome_screen.dart';
 import 'auth_repository.dart';
 import 'sign_up_screen.dart';
+import '../cycle/period_repository.dart';
+import '../cycle/symptoms_repository.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -53,6 +55,11 @@ class _SignInScreenState extends State<SignInScreen> {
 
     try {
       await AuthRepository.instance.signIn(email: email, password: password);
+
+      // Pull cloud data down into local Hive after successful sign-in.
+      await PeriodRepository.instance.syncFromCloud();
+      await SymptomsRepository.instance.syncFromCloud();
+
       if (!mounted) return;
 
       Navigator.of(context).pushReplacement(

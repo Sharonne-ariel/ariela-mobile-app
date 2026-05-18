@@ -92,4 +92,8 @@
   "article6Content": "La plupart des changements liés aux règles sont normaux, mais parfois il faut en parler à un adulte ou à un médecin. Parles-en à un adulte de confiance si :\n\n• Tu as 16 ans ou plus et tu n'as pas encore eu tes premières règles\n• Tes règles sont très abondantes (tu remplis une serviette en moins d'une heure)\n• Tes règles durent plus de 7 jours\n• Tu as une douleur très forte qui ne passe pas avec du repos ou de la chaleur\n• Tu te sens étourdie ou très faible pendant tes règles\n• Tu as tes règles plus d'une fois par mois, ou tu sautes plusieurs mois d'affilée (après les 2 premières années)\n• Tu as de la fièvre pendant tes règles\n\nLes médecins et infirmières parlent de règles tous les jours. Ils ne te jugeront pas, et ils sont là pour aider. Tu peux toujours demander à voir une femme médecin si tu te sens plus à l'aise."
   ,"learnTitle": "Apprendre",
   "learnSubtitle": "Des articles pour comprendre ton corps"
+  ,"settingsSync": "Synchronisation cloud",
+  "syncNow": "Synchroniser maintenant",
+  "syncSuccess": "Données synchronisées",
+  "syncError": "Échec de la synchronisation. Vérifie ta connexion."
 }

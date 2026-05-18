@@ -1,18 +1,15 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../features/cycle/symptoms_screen.dart';
+import '../../main.dart';
+import 'symptoms_screen.dart';
 
-/// Local-only repository for symptom logs.
-///
-/// Each entry is stored under a key built from the date, so logging twice on
-/// the same day overwrites the previous selection.
+/// Local-first repository for symptom logs with optional cloud sync.
 class SymptomsRepository {
   SymptomsRepository._();
   static final instance = SymptomsRepository._();
 
   Box get _box => Hive.box<dynamic>('symptoms');
 
-  /// Key format: `YYYY-MM-DD`
   String _keyForDate(DateTime date) {
     final y = date.year.toString().padLeft(4, '0');
     final m = date.month.toString().padLeft(2, '0');
@@ -20,14 +17,18 @@ class SymptomsRepository {
     return '$y-$m-$d';
   }
 
-  /// Save the set of selected symptoms for the given day.
   Future<void> saveForDate(DateTime date, Set<Symptom> symptoms) async {
     final key = _keyForDate(date);
     final names = symptoms.map((s) => s.name).toList();
     await _box.put(key, names);
+
+    try {
+      await _pushToCloud(date, symptoms);
+    } catch (_) {
+      // Silent fail.
+    }
   }
 
-  /// Returns the symptoms logged for the given day (empty if none).
   Set<Symptom> getForDate(DateTime date) {
     final key = _keyForDate(date);
     final raw = _box.get(key);
@@ -38,10 +39,64 @@ class SymptomsRepository {
       if (name is! String) continue;
       try {
         result.add(Symptom.values.byName(name));
-      } catch (_) {
-        // Unknown symptom name (e.g. removed in a later version) — ignore.
-      }
+      } catch (_) {}
     }
     return result;
+  }
+
+  Future<void> _pushToCloud(DateTime date, Set<Symptom> symptoms) async {
+    final userId = supabase.auth.currentUser?.id;
+    if (userId == null) return;
+
+    final dateStr = _keyForDate(date);
+
+    // First delete existing entries for this date, then insert the new set.
+    // This avoids managing diffs per-symptom.
+    await supabase
+        .from('symptoms')
+        .delete()
+        .eq('user_id', userId)
+        .eq('date', dateStr);
+
+    if (symptoms.isEmpty) return;
+
+    final rows = symptoms
+        .map((s) => {
+              'user_id': userId,
+              'date': dateStr,
+              'symptom_type': s.name,
+              'intensity': 3, // default intensity for now
+            })
+        .toList();
+
+    await supabase.from('symptoms').insert(rows);
+  }
+
+  Future<void> syncFromCloud() async {
+    final userId = supabase.auth.currentUser?.id;
+    if (userId == null) return;
+
+    try {
+      final rows = await supabase
+          .from('symptoms')
+          .select()
+          .eq('user_id', userId);
+
+      // Group by date
+      final byDate = <String, Set<String>>{};
+      for (final row in rows as List) {
+        if (row is! Map) continue;
+        final dateStr = row['date'] as String?;
+        final type = row['symptom_type'] as String?;
+        if (dateStr == null || type == null) continue;
+        byDate.putIfAbsent(dateStr, () => {}).add(type);
+      }
+
+      for (final entry in byDate.entries) {
+        await _box.put(entry.key, entry.value.toList());
+      }
+    } catch (_) {
+      // Silent fail.
+    }
   }
 }

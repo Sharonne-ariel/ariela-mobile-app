@@ -96,4 +96,8 @@
   "article6Content": "Most period changes are normal, but sometimes you should talk to an adult or a doctor. Tell a trusted adult if:\n\n• You're 16 or older and you haven't had your first period yet\n• Your period is very heavy (you soak a pad in less than 1 hour)\n• Your period lasts more than 7 days\n• You have very strong pain that doesn't go away with rest or warmth\n• You feel dizzy or very weak during your period\n• You get a period more than once a month, or you skip several months in a row (after the first 2 years)\n• You have a fever during your period\n\nDoctors and nurses talk about periods every day. They won't judge you, and they're there to help. You can always ask to see a female doctor if you feel more comfortable."
   ,"learnTitle": "Learn",
   "learnSubtitle": "Educational articles about your body"
+  ,"settingsSync": "Cloud sync",
+  "syncNow": "Sync now",
+  "syncSuccess": "Data synced successfully",
+  "syncError": "Sync failed. Check your connection."
 }
