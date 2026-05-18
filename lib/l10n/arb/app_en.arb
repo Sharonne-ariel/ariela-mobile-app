@@ -100,4 +100,13 @@
   "syncNow": "Sync now",
   "syncSuccess": "Data synced successfully",
   "syncError": "Sync failed. Check your connection."
+  ,"historyTitle": "Cycle history",
+  "historySubtitle": "Your patterns over time",
+  "statsAverageCycle": "Average cycle",
+  "statsAveragePeriod": "Average period",
+  "statsTotalCycles": "Cycles tracked",
+  "statsDays": "days",
+  "historyEmpty": "Log your first period to start seeing your cycle history",
+  "cycleNumber": "Cycle {n}",
+  "@cycleNumber": { "placeholders": { "n": { "type": "int" } } }
 }

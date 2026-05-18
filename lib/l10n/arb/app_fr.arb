@@ -96,4 +96,12 @@
   "syncNow": "Synchroniser maintenant",
   "syncSuccess": "Données synchronisées",
   "syncError": "Échec de la synchronisation. Vérifie ta connexion."
+  ,"historyTitle": "Historique des cycles",
+  "historySubtitle": "Tes tendances dans le temps",
+  "statsAverageCycle": "Cycle moyen",
+  "statsAveragePeriod": "Règles moyennes",
+  "statsTotalCycles": "Cycles suivis",
+  "statsDays": "jours",
+  "historyEmpty": "Enregistre tes premières règles pour voir ton historique",
+  "cycleNumber": "Cycle {n}"
 }

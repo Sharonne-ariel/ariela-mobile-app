@@ -7,6 +7,7 @@ import 'cycle_data.dart';
 import 'symptoms_screen.dart';
 import '../settings/settings_screen.dart';
 import '../first_period/first_period_screen.dart';
+import 'history_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -63,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 12),
 
               // ----- Header -----
-             // ----- Header -----
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -74,22 +74,38 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 26,
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.settings_outlined,
-                      color: ArielaTheme.textBody,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => const SettingsScreen(),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.bar_chart_rounded,
+                          color: ArielaTheme.textBody,
                         ),
-                      );
-                    },
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const HistoryScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.settings_outlined,
+                          color: ArielaTheme.textBody,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const SettingsScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
-
               const SizedBox(height: 24),
 
               // ----- Cycle ring card -----
