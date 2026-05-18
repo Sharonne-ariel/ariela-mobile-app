@@ -109,4 +109,15 @@
   "historyEmpty": "Log your first period to start seeing your cycle history",
   "cycleNumber": "Cycle {n}",
   "@cycleNumber": { "placeholders": { "n": { "type": "int" } } }
+  ,"editCycle": "Edit cycle",
+  "startDate": "Start date",
+  "endDate": "End date",
+  "endDateNone": "Not ended yet",
+  "deleteCycle": "Delete cycle",
+  "deleteConfirm": "Delete this cycle?",
+  "deleteConfirmMessage": "This action cannot be undone.",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "cycleUpdated": "Cycle updated",
+  "cycleDeleted": "Cycle deleted"
 }

@@ -99,4 +99,35 @@ class PeriodRepository {
       // Silent fail: user can still use the app offline.
     }
   }
+  /// Delete a period from local storage and (if signed in) cloud.
+  Future<void> delete(DateTime startDate) async {
+    final key = startDate.toIso8601String();
+    await _box.delete(key);
+
+    try {
+      final userId = supabase.auth.currentUser?.id;
+      if (userId == null) return;
+      final dateStr = startDate.toIso8601String().split('T').first;
+      await supabase
+          .from('cycles')
+          .delete()
+          .eq('user_id', userId)
+          .eq('start_date', dateStr);
+    } catch (_) {
+      // Silent fail.
+    }
+  }
+
+  /// Update an existing period. If the start date changed, the old key is
+  /// removed before saving the new one.
+  Future<void> update({
+    required DateTime originalStartDate,
+    required PeriodEntry updated,
+  }) async {
+    // If the start date changed, remove the old entry first.
+    if (originalStartDate != updated.startDate) {
+      await delete(originalStartDate);
+    }
+    await save(updated);
+  }
 }

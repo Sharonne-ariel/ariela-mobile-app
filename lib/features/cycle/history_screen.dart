@@ -5,10 +5,16 @@ import '../../l10n/generated/app_localizations.dart';
 import 'cycle_data.dart';
 import 'cycle_stats.dart';
 import 'period_repository.dart';
+import 'edit_period_screen.dart';
 
-class HistoryScreen extends StatelessWidget {
+class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
 
+  @override
+  State<HistoryScreen> createState() => _HistoryScreenState();
+}
+
+class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -61,10 +67,21 @@ class HistoryScreen extends StatelessWidget {
                 final cycleNumber = periods.length - index;
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: _CycleCard(
-                    period: period,
-                    cycleNumber: cycleNumber,
-                    l10n: l10n,
+                  child: GestureDetector(
+                    onTap: () async {
+                      await Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => EditPeriodScreen(period: period),
+                        ),
+                      );
+                      // Refresh after edit/delete
+                      if (mounted) setState(() {});
+                    },
+                    child: _CycleCard(
+                      period: period,
+                      cycleNumber: cycleNumber,
+                      l10n: l10n,
+                    ),
                   ),
                 );
               }),

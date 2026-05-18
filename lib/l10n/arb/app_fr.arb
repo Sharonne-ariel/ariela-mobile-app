@@ -104,4 +104,15 @@
   "statsDays": "jours",
   "historyEmpty": "Enregistre tes premières règles pour voir ton historique",
   "cycleNumber": "Cycle {n}"
+  ,"editCycle": "Modifier le cycle",
+  "startDate": "Date de début",
+  "endDate": "Date de fin",
+  "endDateNone": "Non terminée",
+  "deleteCycle": "Supprimer le cycle",
+  "deleteConfirm": "Supprimer ce cycle ?",
+  "deleteConfirmMessage": "Cette action est irréversible.",
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "cycleUpdated": "Cycle modifié",
+  "cycleDeleted": "Cycle supprimé"
 }
