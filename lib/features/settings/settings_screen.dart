@@ -7,6 +7,7 @@ import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../cycle/period_repository.dart';
 import '../cycle/symptoms_repository.dart';
+import '../profile/profile_screen.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -39,6 +40,34 @@ class SettingsScreen extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           children: [
+
+            // ----- Profile section -----
+            _SettingsCard(
+              children: [
+                ListTile(
+                  leading: const Icon(
+                    Icons.person_outline_rounded,
+                    color: ArielaTheme.lavender600,
+                  ),
+                  title: Text(l10n.profileTitle),
+                  trailing: const Icon(
+                    Icons.chevron_right_rounded,
+                    color: ArielaTheme.textMuted,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const ProfileScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 32),
+
+            // ----- Language section -----
+            _SectionHeader(label: l10n.settingsLanguage),
             // ----- Language section -----
             _SectionHeader(label: l10n.settingsLanguage),
             const SizedBox(height: 8),

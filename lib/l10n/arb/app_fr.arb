@@ -115,4 +115,12 @@
   "delete": "Supprimer",
   "cycleUpdated": "Cycle modifié",
   "cycleDeleted": "Cycle supprimé"
+  ,"profileTitle": "Mon profil",
+  "profileDisplayName": "Prénom",
+  "profileBirthYear": "Année de naissance",
+  "profileEmail": "Email",
+  "profileSave": "Enregistrer",
+  "profileSaved": "Profil mis à jour",
+  "profileNamePlaceholder": "Ton prénom",
+  "profileBirthYearPlaceholder": "ex. 1998"
 }

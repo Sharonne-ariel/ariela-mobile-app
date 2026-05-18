@@ -120,4 +120,12 @@
   "delete": "Delete",
   "cycleUpdated": "Cycle updated",
   "cycleDeleted": "Cycle deleted"
+  ,"profileTitle": "My profile",
+  "profileDisplayName": "Name",
+  "profileBirthYear": "Birth year",
+  "profileEmail": "Email",
+  "profileSave": "Save changes",
+  "profileSaved": "Profile updated",
+  "profileNamePlaceholder": "Your name",
+  "profileBirthYearPlaceholder": "e.g. 1998"
 }
