@@ -99,4 +99,23 @@ class SymptomsRepository {
       // Silent fail.
     }
   }
+  /// Returns all symptoms logged on dates between [start] and [end] (inclusive).
+  /// Result is a map: date → set of symptoms.
+  Map<DateTime, Set<Symptom>> getForRange(DateTime start, DateTime end) {
+    final result = <DateTime, Set<Symptom>>{};
+
+    // Normalize to date-only.
+    final s = DateTime(start.year, start.month, start.day);
+    final e = DateTime(end.year, end.month, end.day);
+
+    for (var day = s;
+        !day.isAfter(e);
+        day = day.add(const Duration(days: 1))) {
+      final symptoms = getForDate(day);
+      if (symptoms.isNotEmpty) {
+        result[day] = symptoms;
+      }
+    }
+    return result;
+  }
 }

@@ -128,4 +128,10 @@
   "profileSaved": "Profile updated",
   "profileNamePlaceholder": "Your name",
   "profileBirthYearPlaceholder": "e.g. 1998"
+  ,"cycleDetailTitle": "Cycle details",
+  "cycleDetailSymptoms": "Symptoms logged",
+  "cycleDetailNoSymptoms": "No symptoms logged for this cycle",
+  "cycleDetailDuration": "Duration",
+  "cycleDetailOngoing": "Ongoing",
+  "edit": "Edit"
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'cycle_detail_screen.dart';
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
 import 'cycle_data.dart';
 import 'cycle_stats.dart';
 import 'period_repository.dart';
-import 'edit_period_screen.dart';
+
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -71,10 +71,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     onTap: () async {
                       await Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => EditPeriodScreen(period: period),
+                          builder: (_) =>
+                              CycleDetailScreen(period: period),
                         ),
                       );
-                      // Refresh after edit/delete
+                      // Refresh after detail/edit/delete
                       if (mounted) setState(() {});
                     },
                     child: _CycleCard(

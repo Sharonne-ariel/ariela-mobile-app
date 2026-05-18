@@ -123,4 +123,10 @@
   "profileSaved": "Profil mis à jour",
   "profileNamePlaceholder": "Ton prénom",
   "profileBirthYearPlaceholder": "ex. 1998"
+  ,"cycleDetailTitle": "Détails du cycle",
+  "cycleDetailSymptoms": "Symptômes enregistrés",
+  "cycleDetailNoSymptoms": "Aucun symptôme enregistré pendant ce cycle",
+  "cycleDetailDuration": "Durée",
+  "cycleDetailOngoing": "En cours",
+  "edit": "Modifier"
 }
