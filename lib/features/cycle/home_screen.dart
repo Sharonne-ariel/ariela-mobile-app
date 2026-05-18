@@ -6,6 +6,7 @@ import '../../ui/components/ariela_button.dart';
 import 'cycle_data.dart';
 import 'symptoms_screen.dart';
 import '../settings/settings_screen.dart';
+import '../first_period/first_period_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -123,6 +124,78 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
+
+              const SizedBox(height: 24),
+
+              // ----- Learn card -----
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const FirstPeriodScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: ArielaTheme.lavender50,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: ArielaTheme.lavender200,
+                      width: 0.5,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.menu_book_outlined,
+                          size: 22,
+                          color: ArielaTheme.lavender600,
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.learnTitle,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: ArielaTheme.lavender900,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              l10n.learnSubtitle,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: ArielaTheme.textBody,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(
+                        Icons.chevron_right_rounded,
+                        color: ArielaTheme.lavender600,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 32),
 
               const SizedBox(height: 32),
 

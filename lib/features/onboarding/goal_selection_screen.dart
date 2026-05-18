@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../first_period/first_period_screen.dart';
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../ui/components/ariela_button.dart';
@@ -75,6 +75,12 @@ class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (_) => const HomeScreen(),
+                            ),
+                          );
+                        } else if (_selected == UserGoal.firstPeriod) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (_) => const FirstPeriodScreen(),
                             ),
                           );
                         } else {
