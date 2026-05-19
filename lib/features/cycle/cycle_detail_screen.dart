@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
 import '../../l10n/generated/app_localizations.dart';
-import '../../ui/components/ariela_button.dart';
 import 'cycle_data.dart';
 import 'edit_period_screen.dart';
 import 'symptoms_repository.dart';
@@ -35,7 +34,6 @@ class _CycleDetailScreenState extends State<CycleDetailScreen> {
         builder: (_) => EditPeriodScreen(period: _period),
       ),
     );
-    // After edit, pop back to History (which will refresh)
     if (mounted) Navigator.of(context).pop();
   }
 
@@ -48,12 +46,10 @@ class _CycleDetailScreenState extends State<CycleDetailScreen> {
     final end = _period.endDate ?? DateTime.now();
     final duration = end.difference(start).inDays + 1;
 
-    // Get all symptoms within the cycle window.
-    final symptomsByDate =
+    final logsByDate =
         SymptomsRepository.instance.getForRange(start, end);
 
-    // Sort dates ascending.
-    final sortedDates = symptomsByDate.keys.toList()
+    final sortedDates = logsByDate.keys.toList()
       ..sort((a, b) => a.compareTo(b));
 
     return Scaffold(
@@ -148,7 +144,6 @@ class _CycleDetailScreenState extends State<CycleDetailScreen> {
 
             const SizedBox(height: 32),
 
-            // Symptoms section
             Text(
               l10n.cycleDetailSymptoms,
               style: const TextStyle(
@@ -164,14 +159,10 @@ class _CycleDetailScreenState extends State<CycleDetailScreen> {
               _EmptyState(message: l10n.cycleDetailNoSymptoms)
             else
               ...sortedDates.map((date) {
-                final symptoms = symptomsByDate[date]!;
+                final logs = logsByDate[date]!;
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: _DayCard(
-                    date: date,
-                    symptoms: symptoms,
-                    l10n: l10n,
-                  ),
+                  child: _DayCard(date: date, logs: logs, l10n: l10n),
                 );
               }),
 
@@ -186,16 +177,20 @@ class _CycleDetailScreenState extends State<CycleDetailScreen> {
 class _DayCard extends StatelessWidget {
   const _DayCard({
     required this.date,
-    required this.symptoms,
+    required this.logs,
     required this.l10n,
   });
 
   final DateTime date;
-  final Set<Symptom> symptoms;
+  final List<SymptomLog> logs;
   final AppLocalizations l10n;
 
   String _formatDate(DateTime d) =>
       '${d.day.toString().padLeft(2, '0')}/${d.month.toString().padLeft(2, '0')}';
+
+  String _intensityDots(int intensity) {
+    return '●' * intensity + '○' * (5 - intensity);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,39 +204,27 @@ class _DayCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: ArielaTheme.lavender50,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  _formatDate(date),
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: ArielaTheme.lavender600,
-                  ),
-                ),
+          Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: ArielaTheme.lavender50,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              _formatDate(date),
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: ArielaTheme.lavender600,
               ),
-              const SizedBox(width: 8),
-              Text(
-                '${symptoms.length} ${symptoms.length == 1 ? "" : ""}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: ArielaTheme.textMuted,
-                ),
-              ),
-            ],
+            ),
           ),
           const SizedBox(height: 10),
           Wrap(
             spacing: 6,
             runSpacing: 6,
-            children: symptoms.map((s) {
+            children: logs.map((log) {
               return Container(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 10, vertical: 6),
@@ -252,13 +235,23 @@ class _DayCard extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(s.icon, size: 14, color: ArielaTheme.lavender600),
+                    Icon(log.symptom.icon,
+                        size: 14, color: ArielaTheme.lavender600),
                     const SizedBox(width: 5),
                     Text(
-                      s.label(l10n),
+                      log.symptom.label(l10n),
                       style: const TextStyle(
                         fontSize: 12,
                         color: ArielaTheme.textBody,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      _intensityDots(log.intensity),
+                      style: const TextStyle(
+                        fontSize: 8,
+                        color: ArielaTheme.lavender600,
+                        letterSpacing: 0,
                       ),
                     ),
                   ],

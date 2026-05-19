@@ -175,4 +175,12 @@
   "fertilityDaysUntilOvulation": "{n} jours avant l'ovulation"
   ,"homeFertilityCard": "Fertilité",
   "homeFertilityCardSub": "Comprends ta fenêtre fertile"
+  ,"intensity": "Intensité",
+  "intensityLow": "Légère",
+  "intensityMedium": "Modérée",
+  "intensityHigh": "Forte",
+  "dailyNoteTitle": "Note du jour",
+  "dailyNoteHint": "Comment s'est passée ta journée ? Quelque chose à retenir ?",
+  "dailyNoteSaved": "Note enregistrée",
+  "addNote": "Ajouter une note"
  }

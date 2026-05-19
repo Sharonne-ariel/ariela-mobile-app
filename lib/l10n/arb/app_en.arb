@@ -184,4 +184,12 @@
   "@fertilityDaysUntilOvulation": { "placeholders": { "n": { "type": "int" } } }
   ,"homeFertilityCard": "Fertility",
   "homeFertilityCardSub": "Understand your fertile window"
+  ,"intensity": "Intensity",
+  "intensityLow": "Mild",
+  "intensityMedium": "Moderate",
+  "intensityHigh": "Strong",
+  "dailyNoteTitle": "Daily note",
+  "dailyNoteHint": "How was your day? Anything you want to remember?",
+  "dailyNoteSaved": "Note saved",
+  "addNote": "Add a note"
 }

@@ -3,7 +3,34 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../../main.dart';
 import 'symptoms_screen.dart';
 
-/// Local-first repository for symptom logs with optional cloud sync.
+/// A logged symptom with its intensity (1=mild, 3=moderate, 5=strong).
+class SymptomLog {
+  const SymptomLog({required this.symptom, required this.intensity});
+
+  final Symptom symptom;
+  final int intensity;
+
+  Map<String, dynamic> toMap() => {
+        'symptom': symptom.name,
+        'intensity': intensity,
+      };
+
+  static SymptomLog? fromMap(Map raw) {
+    final name = raw['symptom'] as String?;
+    final intensity = raw['intensity'] as int? ?? 3;
+    if (name == null) return null;
+    try {
+      return SymptomLog(
+        symptom: Symptom.values.byName(name),
+        intensity: intensity,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+/// Local-first repository for symptom logs with cloud sync.
 class SymptomsRepository {
   SymptomsRepository._();
   static final instance = SymptomsRepository._();
@@ -17,55 +44,85 @@ class SymptomsRepository {
     return '$y-$m-$d';
   }
 
-  Future<void> saveForDate(DateTime date, Set<Symptom> symptoms) async {
+  /// Save the set of logged symptoms (with intensity) for the given day.
+  Future<void> saveForDate(DateTime date, List<SymptomLog> logs) async {
     final key = _keyForDate(date);
-    final names = symptoms.map((s) => s.name).toList();
-    await _box.put(key, names);
+    final encoded = logs.map((l) => l.toMap()).toList();
+    await _box.put(key, encoded);
 
     try {
-      await _pushToCloud(date, symptoms);
+      await _pushToCloud(date, logs);
     } catch (_) {
       // Silent fail.
     }
   }
 
-  Set<Symptom> getForDate(DateTime date) {
+  /// Returns the symptoms logged for the given day.
+  List<SymptomLog> getForDate(DateTime date) {
     final key = _keyForDate(date);
     final raw = _box.get(key);
-    if (raw is! List) return {};
+    if (raw is! List) return [];
 
-    final result = <Symptom>{};
-    for (final name in raw) {
-      if (name is! String) continue;
-      try {
-        result.add(Symptom.values.byName(name));
-      } catch (_) {}
+    final result = <SymptomLog>[];
+    for (final entry in raw) {
+      // Backward compat: old format was just a list of names (strings).
+      if (entry is String) {
+        try {
+          result.add(SymptomLog(
+            symptom: Symptom.values.byName(entry),
+            intensity: 3,
+          ));
+        } catch (_) {}
+      } else if (entry is Map) {
+        final log = SymptomLog.fromMap(entry);
+        if (log != null) result.add(log);
+      }
     }
     return result;
   }
 
-  Future<void> _pushToCloud(DateTime date, Set<Symptom> symptoms) async {
+  /// Returns just the symptoms (no intensity) — convenience for existing UI.
+  Set<Symptom> getSymptomsForDate(DateTime date) =>
+      getForDate(date).map((l) => l.symptom).toSet();
+
+  /// Returns symptoms in a date range. Map: date → list of logs.
+  Map<DateTime, List<SymptomLog>> getForRange(DateTime start, DateTime end) {
+    final result = <DateTime, List<SymptomLog>>{};
+    final s = DateTime(start.year, start.month, start.day);
+    final e = DateTime(end.year, end.month, end.day);
+
+    for (var day = s;
+        !day.isAfter(e);
+        day = day.add(const Duration(days: 1))) {
+      final logs = getForDate(day);
+      if (logs.isNotEmpty) {
+        result[day] = logs;
+      }
+    }
+    return result;
+  }
+
+  Future<void> _pushToCloud(
+      DateTime date, List<SymptomLog> logs) async {
     final userId = supabase.auth.currentUser?.id;
     if (userId == null) return;
 
     final dateStr = _keyForDate(date);
 
-    // First delete existing entries for this date, then insert the new set.
-    // This avoids managing diffs per-symptom.
     await supabase
         .from('symptoms')
         .delete()
         .eq('user_id', userId)
         .eq('date', dateStr);
 
-    if (symptoms.isEmpty) return;
+    if (logs.isEmpty) return;
 
-    final rows = symptoms
-        .map((s) => {
+    final rows = logs
+        .map((l) => {
               'user_id': userId,
               'date': dateStr,
-              'symptom_type': s.name,
-              'intensity': 3, // default intensity for now
+              'symptom_type': l.symptom.name,
+              'intensity': l.intensity,
             })
         .toList();
 
@@ -82,40 +139,23 @@ class SymptomsRepository {
           .select()
           .eq('user_id', userId);
 
-      // Group by date
-      final byDate = <String, Set<String>>{};
+      // Group by date → list of logs
+      final byDate = <String, List<Map<String, dynamic>>>{};
       for (final row in rows as List) {
         if (row is! Map) continue;
         final dateStr = row['date'] as String?;
         final type = row['symptom_type'] as String?;
+        final intensity = row['intensity'] as int? ?? 3;
         if (dateStr == null || type == null) continue;
-        byDate.putIfAbsent(dateStr, () => {}).add(type);
+        byDate.putIfAbsent(dateStr, () => []).add({
+          'symptom': type,
+          'intensity': intensity,
+        });
       }
 
       for (final entry in byDate.entries) {
-        await _box.put(entry.key, entry.value.toList());
+        await _box.put(entry.key, entry.value);
       }
-    } catch (_) {
-      // Silent fail.
-    }
-  }
-  /// Returns all symptoms logged on dates between [start] and [end] (inclusive).
-  /// Result is a map: date → set of symptoms.
-  Map<DateTime, Set<Symptom>> getForRange(DateTime start, DateTime end) {
-    final result = <DateTime, Set<Symptom>>{};
-
-    // Normalize to date-only.
-    final s = DateTime(start.year, start.month, start.day);
-    final e = DateTime(end.year, end.month, end.day);
-
-    for (var day = s;
-        !day.isAfter(e);
-        day = day.add(const Duration(days: 1))) {
-      final symptoms = getForDate(day);
-      if (symptoms.isNotEmpty) {
-        result[day] = symptoms;
-      }
-    }
-    return result;
+    } catch (_) {}
   }
 }
