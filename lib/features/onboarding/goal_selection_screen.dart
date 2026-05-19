@@ -6,6 +6,9 @@ import '../../ui/components/ariela_button.dart';
 import 'user_goal.dart';
 import '../cycle/home_screen.dart';
 import 'coming_soon_screen.dart';
+import '../pregnancy/pregnancy_screen.dart';
+import '../pregnancy/pregnancy_repository.dart';
+import '../pregnancy/pregnancy_setup_screen.dart';
 
 class GoalSelectionScreen extends StatefulWidget {
   const GoalSelectionScreen({super.key});
@@ -81,6 +84,17 @@ class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (_) => const FirstPeriodScreen(),
+                            ),
+                          );
+                        } else if (_selected == UserGoal.pregnancy) {
+                          final hasData = PregnancyRepository.instance
+                                  .getLastPeriodDate() !=
+                              null;
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (_) => hasData
+                                  ? const PregnancyScreen()
+                                  : const PregnancySetupScreen(),
                             ),
                           );
                         } else {

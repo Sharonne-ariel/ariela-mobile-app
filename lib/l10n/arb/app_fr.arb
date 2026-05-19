@@ -129,4 +129,27 @@
   "cycleDetailDuration": "Durée",
   "cycleDetailOngoing": "En cours",
   "edit": "Modifier"
-}
+  ,"pregnancyTitle": "Ma grossesse",
+  "pregnancySetupTitle": "Bienvenue dans ton voyage",
+  "pregnancySetupSubtitle": "Configurons ton suivi de grossesse",
+  "pregnancyDueDate": "Date prévue d'accouchement",
+  "pregnancyDueDateHint": "Quelle est ta date prévue ?",
+  "pregnancyConceptionDate": "Je ne connais pas ma DPA",
+  "pregnancyConceptionHint": "Utiliser la date des dernières règles",
+  "pregnancyLastPeriodDate": "Premier jour des dernières règles",
+  "pregnancyWeek": "Semaine {n}",
+  "pregnancyDayOfWeek": "Jour {d} de la semaine {w}",
+  "pregnancyTrimester1": "Premier trimestre",
+  "pregnancyTrimester2": "Deuxième trimestre",
+  "pregnancyTrimester3": "Troisième trimestre",
+  "pregnancyDaysUntilBirth": "{n} jours avant l'arrivée de ton bébé",
+  "pregnancyBabySize": "Ton bébé a la taille d'",
+  "pregnancyFunFact": "Cette semaine",
+  "pregnancyEdit": "Modifier la DPA",
+  "pregnancyOverdue": "Ton bébé est en chemin !",
+  "pregnancyTrimester1Info": "Ton bébé se développe rapidement. Les organes principaux se forment. Repose-toi, mange bien, et commence les vitamines prénatales si ce n'est pas déjà fait.",
+  "pregnancyTrimester2Info": "Souvent appelé le trimestre 'facile'. L'énergie revient, les nausées matinales s'atténuent. Les sens de ton bébé se développent et tu peux sentir les premiers coups.",
+  "pregnancyTrimester3Info": "Dernière ligne droite ! Ton bébé prend du poids et se prépare à la naissance. Reste en contact avec ton médecin et prépare ton sac pour la maternité."
+  ,"homePregnancyCard": "Ma grossesse",
+  "homePregnancyCardSub": "Suivi semaine par semaine"
+ }

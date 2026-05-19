@@ -8,6 +8,9 @@ import 'symptoms_screen.dart';
 import '../settings/settings_screen.dart';
 import '../first_period/first_period_screen.dart';
 import 'history_screen.dart';
+import '../pregnancy/pregnancy_repository.dart';
+import '../pregnancy/pregnancy_screen.dart';
+import '../pregnancy/pregnancy_setup_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -142,6 +145,81 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               const SizedBox(height: 24),
+
+              // ----- Pregnancy card -----
+              GestureDetector(
+                onTap: () {
+                  final hasData = PregnancyRepository.instance
+                          .getLastPeriodDate() !=
+                      null;
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => hasData
+                          ? const PregnancyScreen()
+                          : const PregnancySetupScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: ArielaTheme.pink50,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: ArielaTheme.pink200,
+                      width: 0.5,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.child_friendly_outlined,
+                          size: 22,
+                          color: ArielaTheme.pink600,
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.homePregnancyCard,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: ArielaTheme.pink900,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              l10n.homePregnancyCardSub,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: ArielaTheme.textBody,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(
+                        Icons.chevron_right_rounded,
+                        color: ArielaTheme.pink600,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 12),
 
               // ----- Learn card -----
               GestureDetector(
