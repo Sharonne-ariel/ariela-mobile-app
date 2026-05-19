@@ -160,4 +160,28 @@
   "pregnancyTrimester3Info": "Final stretch! Your baby gains weight and prepares for birth. Stay close to your healthcare provider and prepare your hospital bag."
   ,"homePregnancyCard": "My pregnancy",
   "homePregnancyCardSub": "Week-by-week tracking"
+  ,"fertilityTitle": "Fertility",
+  "fertilitySubtitle": "Understand your fertile window",
+  "fertilityNoData": "Track at least one cycle to see your fertility predictions",
+  "fertilityCurrentPhase": "Current phase",
+  "fertilityPhaseMenstrual": "Menstrual",
+  "fertilityPhaseFollicular": "Follicular",
+  "fertilityPhaseFertile": "Fertile window",
+  "fertilityPhaseOvulation": "Ovulation day",
+  "fertilityPhaseLuteal": "Luteal",
+  "fertilityNextOvulation": "Next ovulation",
+  "fertilityFertileWindow": "Fertile window",
+  "fertilityChanceLow": "Low chance",
+  "fertilityChanceMedium": "Medium chance",
+  "fertilityChanceHigh": "High chance",
+  "fertilityChancePeak": "Peak fertility",
+  "fertilityTipMenstrual": "Rest and listen to your body. This is a good time for gentle self-care.",
+  "fertilityTipFollicular": "Energy is rising. Great time for new projects and physical activity.",
+  "fertilityTipFertile": "Your body is preparing to release an egg. Higher chance of conception.",
+  "fertilityTipOvulation": "An egg is being released. Peak fertility — highest conception chance.",
+  "fertilityTipLuteal": "Your body is preparing for either pregnancy or your next period.",
+  "fertilityDaysUntilOvulation": "{n} days until ovulation",
+  "@fertilityDaysUntilOvulation": { "placeholders": { "n": { "type": "int" } } }
+  ,"homeFertilityCard": "Fertility",
+  "homeFertilityCardSub": "Understand your fertile window"
 }

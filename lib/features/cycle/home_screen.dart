@@ -11,6 +11,7 @@ import 'history_screen.dart';
 import '../pregnancy/pregnancy_repository.dart';
 import '../pregnancy/pregnancy_screen.dart';
 import '../pregnancy/pregnancy_setup_screen.dart';
+import '../fertility/fertility_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -145,6 +146,76 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               const SizedBox(height: 24),
+
+              // ----- Fertility card -----
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const FertilityScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFEF3C7),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: const Color(0xFFFDE68A),
+                      width: 0.5,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.local_florist_outlined,
+                          size: 22,
+                          color: Color(0xFFD97706),
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.homeFertilityCard,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF92400E),
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              l10n.homeFertilityCardSub,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: ArielaTheme.textBody,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(
+                        Icons.chevron_right_rounded,
+                        color: Color(0xFFD97706),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 12),
 
               // ----- Pregnancy card -----
               GestureDetector(

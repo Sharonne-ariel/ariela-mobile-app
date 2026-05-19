@@ -152,4 +152,27 @@
   "pregnancyTrimester3Info": "Dernière ligne droite ! Ton bébé prend du poids et se prépare à la naissance. Reste en contact avec ton médecin et prépare ton sac pour la maternité."
   ,"homePregnancyCard": "Ma grossesse",
   "homePregnancyCardSub": "Suivi semaine par semaine"
+  ,"fertilityTitle": "Fertilité",
+  "fertilitySubtitle": "Comprends ta fenêtre fertile",
+  "fertilityNoData": "Suis au moins un cycle pour voir tes prédictions de fertilité",
+  "fertilityCurrentPhase": "Phase actuelle",
+  "fertilityPhaseMenstrual": "Règles",
+  "fertilityPhaseFollicular": "Folliculaire",
+  "fertilityPhaseFertile": "Fenêtre fertile",
+  "fertilityPhaseOvulation": "Jour d'ovulation",
+  "fertilityPhaseLuteal": "Lutéale",
+  "fertilityNextOvulation": "Prochaine ovulation",
+  "fertilityFertileWindow": "Fenêtre fertile",
+  "fertilityChanceLow": "Faible chance",
+  "fertilityChanceMedium": "Chance moyenne",
+  "fertilityChanceHigh": "Forte chance",
+  "fertilityChancePeak": "Fertilité maximale",
+  "fertilityTipMenstrual": "Repose-toi et écoute ton corps. C'est un bon moment pour prendre soin de toi.",
+  "fertilityTipFollicular": "L'énergie remonte. Excellent moment pour de nouveaux projets et l'activité physique.",
+  "fertilityTipFertile": "Ton corps se prépare à libérer un ovule. Chance de conception élevée.",
+  "fertilityTipOvulation": "Un ovule est libéré. Fertilité maximale — meilleure chance de conception.",
+  "fertilityTipLuteal": "Ton corps se prépare soit à une grossesse, soit aux prochaines règles.",
+  "fertilityDaysUntilOvulation": "{n} jours avant l'ovulation"
+  ,"homeFertilityCard": "Fertilité",
+  "homeFertilityCardSub": "Comprends ta fenêtre fertile"
  }

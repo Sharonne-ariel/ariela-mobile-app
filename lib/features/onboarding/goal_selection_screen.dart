@@ -9,6 +9,7 @@ import 'coming_soon_screen.dart';
 import '../pregnancy/pregnancy_screen.dart';
 import '../pregnancy/pregnancy_repository.dart';
 import '../pregnancy/pregnancy_setup_screen.dart';
+import '../fertility/fertility_screen.dart';
 
 class GoalSelectionScreen extends StatefulWidget {
   const GoalSelectionScreen({super.key});
@@ -84,6 +85,12 @@ class _GoalSelectionScreenState extends State<GoalSelectionScreen> {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (_) => const FirstPeriodScreen(),
+                            ),
+                          );
+                          } else if (_selected == UserGoal.fertility) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (_) => const FertilityScreen(),
                             ),
                           );
                         } else if (_selected == UserGoal.pregnancy) {
