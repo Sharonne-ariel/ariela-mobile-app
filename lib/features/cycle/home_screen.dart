@@ -12,6 +12,10 @@ import '../pregnancy/pregnancy_repository.dart';
 import '../pregnancy/pregnancy_screen.dart';
 import '../pregnancy/pregnancy_setup_screen.dart';
 import '../fertility/fertility_screen.dart';
+import '../ai/ai_assistant_screen.dart';
+import '../postpartum/postpartum_repository.dart';
+import '../postpartum/postpartum_screen.dart';
+import '../postpartum/postpartum_setup_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -116,8 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
               _CycleRingCard(period: period, l10n: l10n),
 
               const SizedBox(height: 16),
-
-              // ----- Period CTA -----
               // ----- Period CTA -----
               ArielaButton(
                 label: period != null && period.endDate == null
@@ -146,6 +148,76 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               const SizedBox(height: 24),
+
+              // ----- AI Assistant card -----
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const AiAssistantScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: ArielaTheme.lavender50,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: ArielaTheme.lavender200,
+                      width: 0.5,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.auto_awesome_outlined,
+                          size: 22,
+                          color: ArielaTheme.lavender600,
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.homeAiCard,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: ArielaTheme.lavender900,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              l10n.homeAiCardSub,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: ArielaTheme.textBody,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(
+                        Icons.chevron_right_rounded,
+                        color: ArielaTheme.lavender600,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 12),
 
               // ----- Fertility card -----
               GestureDetector(
@@ -216,6 +288,82 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               const SizedBox(height: 12),
+
+              // ----- Postpartum card -----
+              GestureDetector(
+                onTap: () {
+                  final hasData =
+                      PostpartumRepository.instance.getBirthDate() != null;
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => hasData
+                          ? const PostpartumScreen()
+                          : const PostpartumSetupScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFD1FAE5),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: const Color(0xFFA7F3D0),
+                      width: 0.5,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.child_care_outlined,
+                          size: 22,
+                          color: Color(0xFF059669),
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.homePostpartumCard,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF065F46),
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              l10n.homePostpartumCardSub,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: ArielaTheme.textBody,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(
+                        Icons.chevron_right_rounded,
+                        color: Color(0xFF059669),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 12),
+
+              
 
               // ----- Pregnancy card -----
               GestureDetector(
