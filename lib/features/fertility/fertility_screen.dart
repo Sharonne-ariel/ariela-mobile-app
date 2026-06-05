@@ -5,6 +5,7 @@ import '../../l10n/generated/app_localizations.dart';
 import '../cycle/cycle_data.dart';
 import '../cycle/period_repository.dart';
 import 'fertility_math.dart';
+import '../cycle/cycle_predictor.dart';
 
 class FertilityScreen extends StatelessWidget {
   const FertilityScreen({super.key});
@@ -54,10 +55,19 @@ class _FertilityContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Personalized cycle predictions based on user's history
+    final allPeriods = PeriodRepository.instance.getAll();
+    final predictor = CyclePredictor.from(allPeriods);
+    
     final dayInCycle = FertilityMath.dayOfCycle(period.startDate);
-    final phase = FertilityMath.phaseForDay(dayInCycle);
-    final daysUntilOvulation =
-        FertilityMath.daysUntilOvulation(period.startDate);
+    final phase = FertilityMath.phaseForDay(
+      dayInCycle,
+      cycleLength: predictor.averageCycleLength,
+    );
+    final daysUntilOvulation = FertilityMath.daysUntilOvulation(
+      period.startDate,
+      cycleLength: predictor.averageCycleLength,
+    );
     final nextOvulation = DateTime.now().add(Duration(days: daysUntilOvulation));
 
     return ListView(
@@ -141,6 +151,65 @@ class _FertilityContent extends StatelessWidget {
         ),
 
         const SizedBox(height: 24),
+
+        // Personalization indicator
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: predictor.isPersonalized
+                ? ArielaTheme.lavender50
+                : ArielaTheme.surfaceMuted,
+            borderRadius: BorderRadius.circular(12),
+            border: predictor.isPersonalized
+                ? Border.all(color: ArielaTheme.lavender200, width: 0.5)
+                : null,
+          ),
+          child: Row(
+            children: [
+              Icon(
+                predictor.isPersonalized
+                    ? Icons.auto_awesome_outlined
+                    : Icons.info_outline,
+                size: 18,
+                color: predictor.isPersonalized
+                    ? ArielaTheme.lavender600
+                    : ArielaTheme.textMuted,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      predictor.isPersonalized
+                          ? l10n.predictionsPersonalized
+                          : l10n.predictionsDefault,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: predictor.isPersonalized
+                            ? ArielaTheme.lavender900
+                            : ArielaTheme.textBody,
+                      ),
+                    ),
+                    if (predictor.isPersonalized) ...[
+                      const SizedBox(height: 2),
+                      Text(
+                        l10n.predictionsBasedOn(predictor.cyclesAnalyzed),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: ArielaTheme.textBody,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 16),
 
         // Phase timeline
         _PhaseTimeline(currentPhase: phase, l10n: l10n),

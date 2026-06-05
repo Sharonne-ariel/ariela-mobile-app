@@ -5,7 +5,7 @@ import '../../l10n/generated/app_localizations.dart';
 import 'cycle_data.dart';
 import 'cycle_stats.dart';
 import 'period_repository.dart';
-
+import 'cycle_predictor.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -21,6 +21,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     final textTheme = Theme.of(context).textTheme;
     final periods = PeriodRepository.instance.getAll();
     final stats = CycleStats.from(periods);
+    final predictor = CyclePredictor.from(periods);
 
     return Scaffold(
       backgroundColor: ArielaTheme.surfaceBg,
@@ -58,6 +59,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
             else ...[
               // Stats grid
               _StatsGrid(stats: stats, l10n: l10n),
+
+              if (predictor.isPersonalized) ...[
+                const SizedBox(height: 12),
+                _RegularityCard(predictor: predictor, l10n: l10n),
+              ],
+
               const SizedBox(height: 24),
 
               // Cycle list
@@ -75,7 +82,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               CycleDetailScreen(period: period),
                         ),
                       );
-                      // Refresh after detail/edit/delete
                       if (mounted) setState(() {});
                     },
                     child: _CycleCard(
@@ -329,6 +335,86 @@ class _EmptyState extends StatelessWidget {
               fontSize: 14,
               color: ArielaTheme.textBody,
               height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ===========================================================================
+
+class _RegularityCard extends StatelessWidget {
+  const _RegularityCard({required this.predictor, required this.l10n});
+
+  final CyclePredictor predictor;
+  final AppLocalizations l10n;
+
+  @override
+  Widget build(BuildContext context) {
+    final regularityLabel = switch (predictor.regularity) {
+      CycleRegularity.veryRegular => l10n.predictionsRegularityHigh,
+      CycleRegularity.slightlyIrregular => l10n.predictionsRegularityMedium,
+      CycleRegularity.irregular => l10n.predictionsRegularityLow,
+    };
+
+    final color = switch (predictor.regularity) {
+      CycleRegularity.veryRegular => const Color(0xFF059669),
+      CycleRegularity.slightlyIrregular => const Color(0xFFD97706),
+      CycleRegularity.irregular => ArielaTheme.pink600,
+    };
+
+    final bgColor = switch (predictor.regularity) {
+      CycleRegularity.veryRegular => const Color(0xFFD1FAE5),
+      CycleRegularity.slightlyIrregular => const Color(0xFFFEF3C7),
+      CycleRegularity.irregular => ArielaTheme.pink50,
+    };
+
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            alignment: Alignment.center,
+            child: Icon(
+              Icons.auto_awesome_outlined,
+              size: 18,
+              color: color,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  regularityLabel,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: color,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  l10n.predictionsBasedOn(predictor.cyclesAnalyzed),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: ArielaTheme.textBody,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

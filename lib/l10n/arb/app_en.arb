@@ -250,4 +250,11 @@
   "homePostpartumCardSub": "Recovery & wellbeing"
   ,"goalPostpartum": "Postpartum",
   "goalPostpartumSub": "I just had a baby"
+  ,"predictionsBasedOn": "Based on {n} cycles",
+  "@predictionsBasedOn": { "placeholders": { "n": { "type": "int" } } },
+  "predictionsDefault": "Based on standard 28-day cycle",
+  "predictionsRegularityHigh": "Very regular cycles",
+  "predictionsRegularityMedium": "Slightly irregular cycles",
+  "predictionsRegularityLow": "Irregular cycles",
+  "predictionsPersonalized": "Personalized predictions"
 }
