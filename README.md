@@ -1,4 +1,4 @@
-# 🌸 ARIELA
+#  ARIELA
 
 > **Comprendre ton corps, à chaque étape.**
 > _Understand your body, at every stage._
@@ -13,18 +13,18 @@ A bilingual (French / English) women's health companion mobile app, powered by a
 
 ---
 
-## 📱 About
+##  About
 
 ARIELA is a bilingual mobile application focused on women's health across every life stage — from a teenager's first period to postpartum recovery. It combines local-first tracking, intelligent personalized predictions, and a custom AI assistant grounded on a curated medical knowledge base.
 
 Built with a strong focus on privacy, accessibility, and inclusivity — designed to serve women in Europe and French-speaking Africa equally.
 
-🌐 **Live AI API**: [https://shariel-ariela-ai.hf.space](https://shariel-ariela-ai.hf.space)
-🧠 **AI source code**: [Sharonne-ariel/ariela-ai](https://github.com/Sharonne-ariel/ariela-ai)
+ **Live AI API**: [https://shariel-ariela-ai.hf.space](https://shariel-ariela-ai.hf.space)
+ **AI source code**: [Sharonne-ariel/ariela-ai](https://github.com/Sharonne-ariel/ariela-ai)
 
 ---
 
-## ✨ Features (21 shipped)
+##  Features (21 shipped)
 
 ### Free
 - **First Period Mode** — 6 educational articles for young girls (10-16)
@@ -57,7 +57,7 @@ Built with a strong focus on privacy, accessibility, and inclusivity — designe
 
 ---
 
-## 🏗 Architecture
+##  Architecture
 
 ARIELA follows a **local-first** architecture: every interaction is instant because data is written to Hive on the device first, then synchronized to Supabase in the background. The app remains fully functional offline.
 
@@ -81,7 +81,7 @@ ARIELA follows a **local-first** architecture: every interaction is instant beca
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 75+ unit tests with 100% pass rate covering all business-logic modules:
 
@@ -101,7 +101,7 @@ flutter test
 
 ---
 
-## 🚀 Getting started
+##  Getting started
 
 ### Prerequisites
 - Flutter 3.29+
@@ -130,7 +130,7 @@ flutter run
 
 ---
 
-## 🎨 Brand identity
+##  Brand identity
 
 - **Colors**: Lavender (`#6B5DD3`) and Pink (`#E5739A`) on warm neutrals
 - **Typography**: DM Sans 400/500
@@ -147,13 +147,13 @@ The RAG system was benchmarked on a held-out golden set of 20 reformulated quest
 | Top-1 accuracy | **65%** |
 | Top-3 accuracy | **90%** |
 | Mean top-1 similarity | 0.642 |
-| Crisis question (mental health) | ✅ Top-1 |
+| Crisis question (mental health) |  Top-1 |
 
 See the [ariela-ai repo](https://github.com/Sharonne-ariel/ariela-ai) for full evaluation methodology.
 
 ---
 
-## ⚠️ Privacy & Medical Disclaimer
+##  Privacy & Medical Disclaimer
 
 ARIELA handles sensitive health data with the highest privacy standards: EU-hosted Supabase, Row-Level Security on every table, no third-party trackers. Health data never leaves the user's device + EU servers.
 
